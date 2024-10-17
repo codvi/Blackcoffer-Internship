@@ -11,12 +11,20 @@ import {
 
 const CountryChart = ({ data }) => {
   const { colorMode } = useColorMode();
-  const [selectedCountry, setSelectedCountry] = useState(
-    "United States of America"
-  );
+  const [selectedCountry, setSelectedCountry] = useState("");
   const [chartData, setChartData] = useState(null);
+  const [countries, setCountries] = useState([]);
 
   useEffect(() => {
+    // Extract unique country names from the data
+    const uniqueCountries = [...new Set(data.map((entry) => entry.country))];
+    setCountries(uniqueCountries);
+    setSelectedCountry(uniqueCountries[0]); // Set default selected country to the first one
+  }, [data]);
+
+  useEffect(() => {
+    if (!selectedCountry) return;
+
     const countryData = data.filter(
       (entry) => entry.country === selectedCountry
     );
@@ -73,8 +81,8 @@ const CountryChart = ({ data }) => {
 
   return (
     <Box p={6} shadow="md" bg={useColorModeValue("white", "gray.800")} m={50}>
-      <Flex direction="column" margin={'auto'}>
-        <Heading as={"h2"} textAlign="left" mb={4} style={{ textAlign: "left" }} >
+      <Flex direction="column" margin="auto">
+        <Heading as={"h2"} textAlign="left" mb={4} style={{ textAlign: "left" }}>
           Country Chart
         </Heading>
         <Select
@@ -84,14 +92,11 @@ const CountryChart = ({ data }) => {
           w="200px"
           colorScheme="purple"
         >
-          <option value="United States of America">
-            United States of America
-          </option>
-          <option value="Mexico">Mexico</option>
-          <option value="Nigeria">Nigeria</option>
-          <option value="Lebanon">Lebanon</option>
-          <option value="Russia">Russia</option>
-          <option value="Saudi Arabia">Saudi Arabia</option>
+          {countries.map((country) => (
+            <option key={country} value={country}>
+              {country}
+            </option>
+          ))}
         </Select>
         <Box height="500px" width={"100%"}>
           {chartData && <Bar data={chartData} options={chartOptions} />}

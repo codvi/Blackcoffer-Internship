@@ -9,10 +9,10 @@ const IntensityChart = ({ data }) => {
 
   const getColor = (value) => {
     const colors = [
-      '#7F00FF', // Green
-      '#F2B93B', // Yellow
-      '#FF8000', // Orange
-      '#FF453A', // Red
+      '#7F00FF',
+      '#F2B93B', 
+      '#FF8000', 
+      '#FF453A', 
     
     ];
     const threshold = Math.max(...intensityData) / 4;
@@ -61,7 +61,7 @@ const IntensityChart = ({ data }) => {
         displayColors: false,
       },
       legend: {
-        display: false,
+        display: true,
       },
       datalabels: {
         
@@ -108,7 +108,7 @@ const IntensityChart = ({ data }) => {
     },
     animation: {
       duration: 4000,
-      easing: 'easeInOutQuart', // Use a smooth easing function
+      easing: 'easeInOutQuart', 
       mode: 'progressive',
     },
   };
