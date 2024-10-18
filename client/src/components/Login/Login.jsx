@@ -6,12 +6,6 @@ import {
   FormLabel,
   Input,
   Button,
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogContent,
-  AlertDialogOverlay,
 } from '@chakra-ui/react';
 
 const LoginPage = () => {

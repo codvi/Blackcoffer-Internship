@@ -1,72 +1,88 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Pie } from "react-chartjs-2";
-import { Box, Heading, useColorModeValue } from "@chakra-ui/react";
+import { Box, Heading, Select } from "@chakra-ui/react";
 
-const PieChart = ({ data }) => {
-  const sectors = {};
+const SectorChart = ({ data }) => {
+  const [selectedSector, setSelectedSector] = useState("All");
+  const [filteredData, setFilteredData] = useState(data);
 
-  data.forEach((entry) => {
-    if (!sectors[entry.sector]) {
-      sectors[entry.sector] = 0;
-    }
-    sectors[entry.sector] += entry.intensity;
-  });
-
-  const getRandomColor = (index) => {
-    const colors = [
-      "#FF0080",
-      "#00BFFF",
-      "#FFD700",
-      "#32CD32",
-      "#FF4500",
-      "#9400D3",
-      // Add more colors as needed
-    ];
-    return colors[index % colors.length];
+  const handleFilterChange = (event) => {
+    const sector = event.target.value;
+    setSelectedSector(sector);
   };
 
+  useEffect(() => {
+    if (selectedSector === "All") {
+      setFilteredData(data);
+    } else {
+      setFilteredData(data.filter((item) => item.sector === selectedSector));
+    }
+  }, [selectedSector, data]);
+
+  const sectorCounts = {};
+  filteredData.forEach((item) => {
+    if (item.sector in sectorCounts) {
+      sectorCounts[item.sector]++;
+    } else {
+      sectorCounts[item.sector] = 1;
+    }
+  });
+
   const chartData = {
-    labels: Object.keys(sectors),
+    labels: Object.keys(sectorCounts),
     datasets: [
       {
-        data: Object.values(sectors),
-        backgroundColor: Object.keys(sectors).map((_, index) =>
-          getRandomColor(index)
-        ),
+        data: Object.values(sectorCounts),
+        backgroundColor: [
+          "#FF6384",
+          "#36A2EB",
+          "#FFCE56",
+          "#4CAF50",
+          "#FF9800",
+          "#9C27B0",
+          "#3F51B5",
+        ],
+        hoverBackgroundColor: [
+          "#FF6384",
+          "#36A2EB",
+          "#FFCE56",
+          "#4CAF50",
+          "#FF9800",
+          "#9C27B0",
+          "#3F51B5",
+        ],
       },
     ],
   };
 
-  const chartOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      tooltip: {
-        position: "average",
-      },
-    },
-  };
+  const uniqueSectors = ["All", ...new Set(data.map((item) => item.sector))];
 
   return (
-    <Box
-      p={6}
-      borderRadius={20}
-      boxShadow="0px 0px 10px rgba(0, 0, 0, 0.1)"
-      mt={50}
-      ml={50}
-      shadow="md"
-      pb={100}
-      bg={useColorModeValue("white", "gray.800")}
-      maxHeight={700}
-      overflow="hidden"
-    >
-      <Heading as="h2" mb={4}>
-        Sector Chart
+    <Box>
+           {" "}
+      <Heading as="h2" mb={4} textColor={"black"}>
+                Sector Distribution      {" "}
       </Heading>
-
-      <Pie data={chartData} options={chartOptions} />
+           {" "}
+      <Select
+        placeholder="Select Sector"
+        value={selectedSector}
+        onChange={handleFilterChange}
+        mb={4}
+        textColor={"white"}
+        bg={"black"}
+      >
+               {" "}
+        {uniqueSectors.map((sector, index) => (
+          <option key={index} value={sector}>
+                        {sector}         {" "}
+          </option>
+        ))}
+             {" "}
+      </Select>
+            <Pie data={chartData} />   {" "}
     </Box>
   );
 };
 
-export default PieChart;
+export default SectorChart;

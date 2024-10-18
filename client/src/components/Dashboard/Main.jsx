@@ -5,7 +5,7 @@ import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
 import Navbar from "./Navbar";
 import RegionChart from "./RegionChart";
-import { ChakraProvider, Flex, Box, Grid } from "@chakra-ui/react";
+import { ChakraProvider, Flex, Box, Grid, Center } from "@chakra-ui/react";
 import RelevanceBubbleChart from "./Relevance";
 import TopicsRadarChart from "./TopicChart";
 import PieChart from "./SectorChart";
@@ -62,7 +62,7 @@ const Main = () => {
         </Box>
       </Flex>
       <RelevanceBubbleChart data={data} />
-      <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap={6} mb={8}>
+      <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap={6} mb={8} alignContent={"center"}>
             <Box
               bg="white"
               p={6}

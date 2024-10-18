@@ -6,13 +6,11 @@ const RegionChart = ({ data }) => {
   const [selectedRegion, setSelectedRegion] = useState('All');
   const [filteredData, setFilteredData] = useState(data);
 
-  // Function to handle filter change
   const handleFilterChange = (event) => {
     const region = event.target.value;
     setSelectedRegion(region);
   };
 
-  // Update the chart data based on the selected filter
   useEffect(() => {
     if (selectedRegion === 'All') {
       setFilteredData(data);
@@ -21,7 +19,6 @@ const RegionChart = ({ data }) => {
     }
   }, [selectedRegion, data]);
 
-  // Calculate region counts based on filtered data
   const regionCounts = {};
   filteredData.forEach(item => {
     if (item.region in regionCounts) {
@@ -31,7 +28,6 @@ const RegionChart = ({ data }) => {
     }
   });
 
-  // Chart data for Doughnut chart
   const chartData = {
     labels: Object.keys(regionCounts),
     datasets: [
@@ -59,7 +55,6 @@ const RegionChart = ({ data }) => {
     ],
   };
 
-  // Get unique regions for the filter dropdown
   const uniqueRegions = ['All', ...new Set(data.map(item => item.region))];
 
   return (

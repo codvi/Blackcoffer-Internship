@@ -6,8 +6,8 @@ const TopicsRadarChart = ({ data }) => {
   const chartRef = useRef(null);
   const width = 700;
   const height = 700;
-  const levels = 5; // Number of concentric circles
-  const maxValue = 5; // Max value for chart (matches previous scale)
+  const levels = 5; 
+  const maxValue = 5; 
 
   const [selectedTopics, setSelectedTopics] = useState(data.map(item => item.topic));
 
