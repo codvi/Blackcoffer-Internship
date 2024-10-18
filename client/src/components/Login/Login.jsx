@@ -67,20 +67,7 @@ const LoginPage = () => {
           <Button colorScheme="green" mt={6} w="100%" onClick={handleLogin}>
             Login
           </Button>
-          {/* AlertDialog */}
-          <AlertDialog isOpen={isOpen} leastDestructiveRef={undefined}>
-            <AlertDialogOverlay>
-              <AlertDialogContent bg="purple.800" color="white">
-                <AlertDialogHeader>Welcome Admin !!!</AlertDialogHeader>
-                <AlertDialogBody>
-                  Redirecting to the dashboard page...
-                </AlertDialogBody>
-                <AlertDialogFooter>
-                  <Button onClick={() => setIsOpen(false)}>Cancel</Button>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialogOverlay>
-          </AlertDialog>
+         
         </form>
       </Container>
     </Box>

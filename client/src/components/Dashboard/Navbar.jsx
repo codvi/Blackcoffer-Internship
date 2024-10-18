@@ -33,7 +33,7 @@ const Navbar = () => {
   return (
     <Box
       py={2}
-      bgGradient="linear(to-b, #4F3BA9, #9068BE)"
+      bgGradient="linear(to-b, #ff9a9e, #fad0c4)"
       position="sticky"
       top={0}
       zIndex={100}
