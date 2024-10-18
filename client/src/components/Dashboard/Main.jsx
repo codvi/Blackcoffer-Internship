@@ -41,8 +41,10 @@ const Main = () => {
           maxW="50%"
           p={5}
           m={2}
-          boxShadow="0px 0px 10px rgba(0, 0, 0, 0.1)"
+          bg="#F0FFF4"
+          boxShadow="0px 4px 12px rgba(0, 0, 0, 0.1)"
           borderRadius={20}
+          _hover={{ boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.2)" }}
         >
           <RegionChart data={data} />
         </Box>
@@ -51,22 +53,36 @@ const Main = () => {
           maxW="50%"
           p={5}
           m={2}
-          boxShadow="0px 0px 10px rgba(0, 0, 0, 0.1)"
+          bg="#E6FFFA"
+          boxShadow="0px 4px 12px rgba(0, 0, 0, 0.1)"
           borderRadius={20}
+          _hover={{ boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.2)" }}
         >
           <TopicsRadarChart data={data} />
         </Box>
       </Flex>
       <RelevanceBubbleChart data={data} />
-      <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap={4}>
-        <Box>
-          <PieChart data={data} />
-        </Box>
-        <Box>
-          <LikelihoodRadarChart data={data} />
-        </Box>
-      </Grid>
-      <CountryChart data={data} />
+      <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap={6} mb={8}>
+            <Box
+              bg="white"
+              p={6}
+              boxShadow="lg"
+              rounded="lg"
+              _hover={{ boxShadow: "xl" }}
+            >
+              <PieChart data={data} />
+            </Box>
+            <Box
+              bg="white"
+              p={6}
+              boxShadow="lg"
+              rounded="lg"
+              _hover={{ boxShadow: "xl" }}
+            >
+              <LikelihoodRadarChart data={data} />
+            </Box>
+          </Grid>
+          <CountryChart data={data} />
     </ChakraProvider>
   );
 };
